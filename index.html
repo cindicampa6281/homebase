@@ -59,152 +59,16 @@
     .toggle-auth a:hover {
       color: var(--primary-hover);
     }
-  
-    .jobs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
-    }
-
-    .job-card {
-      padding: 24px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .job-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-      border-color: rgba(255,255,255,0.2);
-    }
-
-    .job-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .job-company {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .job-salary {
-      font-weight: 700;
-      color: var(--primary);
-      font-size: 1.1rem;
-      margin-bottom: 15px;
-    }
-
-    .job-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 20px;
-      padding-top: 15px;
-      border-top: 1px solid var(--border-glass);
-    }
-
-    .job-status {
-      font-size: 0.8rem;
-      padding: 4px 12px;
-      border-radius: 20px;
-      background: rgba(52, 199, 89, 0.2);
-      color: var(--success);
-      font-weight: 600;
-    }
-
-    /* Modal Styling */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(5px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-
-    .modal-overlay.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .modal-content {
-      width: 90%;
-      max-width: 500px;
-      padding: 30px;
-      transform: translateY(20px);
-      transition: transform 0.3s ease;
-    }
-
-    .modal-overlay.active .modal-content {
-      transform: translateY(0);
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .close-btn {
-      background: none;
-      border: none;
-      color: var(--text-secondary);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    .form-row {
-      display: flex;
-      gap: 15px;
-      margin-bottom: 15px;
-    }
-    .form-row .form-group {
-      flex: 1;
-      margin-bottom: 0;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.8);
-    }
-    textarea.glass-input {
-      resize: vertical;
-      min-height: 80px;
-    }
-  
-    #dashboard-view { display: none; }
   </style>
-  <script type="module" crossorigin src="/assets/index-BaAXDBfg.js"></script>
+  <script type="module" crossorigin src="/assets/index-sMjucyEa.js"></script>
 </head>
 <body>
   <div id="alert-container"></div>
 
-  <div id="auth-view" class="auth-container">
+  <div class="auth-container">
     <div class="glass-panel auth-card animate-fade-in" id="login-box">
-      <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 8px; background: linear-gradient(135deg, #fff, #ddd); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Chào mừng trở lại</h1>
-      <p style="color: var(--text-secondary); margin-bottom: 24px;">Đăng nhập để tiếp tục với HomeBase</p>
+      <h1>Chào mừng trở lại</h1>
+      <p>Đăng nhập để tìm kiếm công việc tốt nhất</p>
       
       <form id="login-form">
         <div class="form-group">
@@ -225,8 +89,8 @@
 
     <!-- Register Box -->
     <div class="glass-panel auth-card animate-fade-in" id="register-box" style="display: none;">
-      <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 8px; background: linear-gradient(135deg, #fff, #ddd); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Tạo tài khoản</h1>
-      <p style="color: var(--text-secondary); margin-bottom: 24px;">Bắt đầu sự nghiệp của bạn cùng HomeBase</p>
+      <h1>Tạo tài khoản</h1>
+      <p>Bắt đầu sự nghiệp của bạn cùng HomeBase</p>
       
       <form id="register-form">
         <div class="form-group">
@@ -241,17 +105,6 @@
           <label for="reg-password">Mật khẩu</label>
           <input type="password" id="reg-password" class="glass-input" placeholder="••••••••" required />
         </div>
-        <div class="role-selector" style="margin-bottom: 25px;">
-          <input type="radio" id="role-employer" name="reg-role" value="Employer" required />
-          <label for="role-employer" class="role-pill">
-             Tuyển dụng
-          </label>
-          
-          <input type="radio" id="role-employee" name="reg-role" value="Employee" required checked />
-          <label for="role-employee" class="role-pill">
-             Tìm việc
-          </label>
-        </div>
         <button type="submit" class="btn-primary" id="btn-register">Đăng ký</button>
       </form>
 
@@ -260,104 +113,6 @@
       </div>
     </div>
   </div>
-
-  <div id="dashboard-view">
-
-  <div id="alert-container"></div>
-
-  <div class="container animate-fade-in">
-    <div class="navbar">
-      <h1>HomeBase</h1>
-      <div style="display: flex; gap: 15px;">
-        <button id="btn-open-create" class="btn-primary" style="width: auto; padding: 10px 20px;">+ Đăng Việc Mới</button>
-        <button id="btn-logout" class="glass-input" style="width: auto; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; background: transparent;">Đăng xuất</button>
-      </div>
-    </div>
-
-    <div>
-      <h2 style="margin-bottom: 10px;">Khám phá công việc</h2>
-      <p style="color: var(--text-secondary);">Hàng ngàn cơ hội đang chờ đón bạn.</p>
-    </div>
-
-    <div id="jobs-container" class="jobs-grid">
-      <!-- Jobs will be rendered here by JS -->
-      <div style="text-align: center; grid-column: 1 / -1; padding: 40px; color: var(--text-secondary);">
-        Đang tải công việc...
-      </div>
-    </div>
-  </div>
-
-  <!-- Create Job Modal -->
-  <div class="modal-overlay" id="create-modal">
-    <div class="glass-panel modal-content">
-      <div class="modal-header">
-        <h2>Đăng Việc Mới</h2>
-        <button class="close-btn" id="btn-close-modal">&times;</button>
-      </div>
-      <form id="create-job-form">
-        <div class="form-group">
-          <label>Tên công việc</label>
-          <input type="text" id="job-title" class="glass-input" required placeholder="VD: Nhân viên phục vụ quán Cafe" />
-        </div>
-        <div class="form-group">
-          <label>Tên cửa hàng / Công ty</label>
-          <input type="text" id="job-employer" class="glass-input" required placeholder="VD: The Coffee House" />
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Mức lương</label>
-            <input type="text" id="job-pay" class="glass-input" required placeholder="VD: 25.000đ/giờ" />
-          </div>
-          <div class="form-group">
-            <label>Số người cần</label>
-            <input type="number" id="job-workers" class="glass-input" required min="1" value="1" />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Bắt đầu (Date & Time)</label>
-            <input type="datetime-local" id="job-start" class="glass-input" required />
-          </div>
-          <div class="form-group">
-            <label>Kết thúc (Date & Time)</label>
-            <input type="datetime-local" id="job-end" class="glass-input" required />
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Địa điểm</label>
-          <input type="text" id="job-location" class="glass-input" required placeholder="VD: Quận 1, TP.HCM" />
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Số điện thoại liên hệ</label>
-            <input type="tel" id="job-phone" class="glass-input" required placeholder="VD: 0901234567" />
-          </div>
-          <div class="form-group">
-            <label>Email liên hệ</label>
-            <input type="email" id="job-email" class="glass-input" placeholder="VD: contact@abc.com" />
-          </div>
-        </div>
-        <button type="submit" class="btn-primary" id="btn-submit-job">Đăng Ngay</button>
-      </form>
-    </div>
-  </div>
-  
-  <!-- Applicants Modal -->
-  <div class="modal-overlay" id="applicants-modal">
-    <div class="glass-panel modal-content" style="max-height: 80vh; display: flex; flex-direction: column;">
-      <div class="modal-header">
-        <h2>Danh Sách Ứng Viên</h2>
-        <button class="close-btn" id="btn-close-applicants-modal">&times;</button>
-      </div>
-      <div id="applicants-list" style="overflow-y: auto; flex: 1;">
-        <!-- Applicants rendered here -->
-        <div style="text-align: center; color: var(--text-secondary); padding: 20px;">Đang tải...</div>
-      </div>
-    </div>
-  </div>
-
-  
-</div>
 
 </body>
 </html>
