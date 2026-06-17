@@ -60,7 +60,8 @@
       color: var(--primary-hover);
     }
   </style>
-  <script type="module" crossorigin src="/assets/index-sMjucyEa.js"></script>
+  <script type="module" crossorigin src="/assets/main-BHmKR3Zl.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
 </head>
 <body>
   <div id="alert-container"></div>
@@ -104,6 +105,17 @@
         <div class="form-group">
           <label for="reg-password">Mật khẩu</label>
           <input type="password" id="reg-password" class="glass-input" placeholder="••••••••" required />
+        </div>
+        <div class="form-group">
+          <label>Vai trò</label>
+          <div style="display: flex; gap: 20px; margin-top: 10px; font-size: 0.95rem;">
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="radio" name="reg-role" value="Employee" checked style="cursor: pointer;" /> Người tìm việc
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="radio" name="reg-role" value="Employer" style="cursor: pointer;" /> Nhà tuyển dụng
+            </label>
+          </div>
         </div>
         <button type="submit" class="btn-primary" id="btn-register">Đăng ký</button>
       </form>
