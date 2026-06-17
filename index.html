@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HomeBase | Đăng Nhập</title>
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    .auth-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 400px;
+      padding: 40px 30px;
+      text-align: center;
+    }
+
+    .auth-card h1 {
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+
+    .auth-card p {
+      color: var(--text-secondary);
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .toggle-auth {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .toggle-auth a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .toggle-auth a:hover {
+      color: var(--primary-hover);
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/index-B5vfVigd.js"></script>
+</head>
+<body>
+  <div id="alert-container"></div>
+
+  <div class="auth-container">
+    <div class="glass-panel auth-card animate-fade-in" id="login-box">
+      <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 8px; background: linear-gradient(135deg, #fff, #ddd); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Chào mừng trở lại</h1>
+      <p style="color: var(--text-secondary); margin-bottom: 24px;">Đăng nhập để tiếp tục với HomeBase</p>
+      
+      <form id="login-form">
+        <div class="form-group">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" class="glass-input" placeholder="nhap.email@cua.ban" required />
+        </div>
+        <div class="form-group">
+          <label for="login-password">Mật khẩu</label>
+          <input type="password" id="login-password" class="glass-input" placeholder="••••••••" required />
+        </div>
+        <button type="submit" class="btn-primary" id="btn-login">Đăng nhập</button>
+      </form>
+
+      <div class="toggle-auth">
+        Chưa có tài khoản? <a href="#" id="show-register">Đăng ký ngay</a>
+      </div>
+    </div>
+
+    <!-- Register Box -->
+    <div class="glass-panel auth-card animate-fade-in" id="register-box" style="display: none;">
+      <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 8px; background: linear-gradient(135deg, #fff, #ddd); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Tạo tài khoản</h1>
+      <p style="color: var(--text-secondary); margin-bottom: 24px;">Bắt đầu sự nghiệp của bạn cùng HomeBase</p>
+      
+      <form id="register-form">
+        <div class="form-group">
+          <label for="reg-name">Họ và tên</label>
+          <input type="text" id="reg-name" class="glass-input" placeholder="Nguyễn Văn A" required />
+        </div>
+        <div class="form-group">
+          <label for="reg-email">Email</label>
+          <input type="email" id="reg-email" class="glass-input" placeholder="nhap.email@cua.ban" required />
+        </div>
+        <div class="form-group">
+          <label for="reg-password">Mật khẩu</label>
+          <input type="password" id="reg-password" class="glass-input" placeholder="••••••••" required />
+        </div>
+        <div class="role-selector" style="margin-bottom: 25px;">
+          <input type="radio" id="role-employer" name="reg-role" value="Employer" required />
+          <label for="role-employer" class="role-pill">
+             Tuyển dụng
+          </label>
+          
+          <input type="radio" id="role-employee" name="reg-role" value="Employee" required checked />
+          <label for="role-employee" class="role-pill">
+             Tìm việc
+          </label>
+        </div>
+        <button type="submit" class="btn-primary" id="btn-register">Đăng ký</button>
+      </form>
+
+      <div class="toggle-auth">
+        Đã có tài khoản? <a href="#" id="show-login">Đăng nhập</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
