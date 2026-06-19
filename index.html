@@ -3,125 +3,415 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HomeBase | Đăng Nhập</title>
+  <title>HomeBase | Web</title>
   <link rel="stylesheet" href="/style.css" />
-  <style>
-    .auth-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-    }
-
-    .auth-card {
-      width: 100%;
-      max-width: 400px;
-      padding: 40px 30px;
-      text-align: center;
-    }
-
-    .auth-card h1 {
-      margin-bottom: 10px;
-      font-size: 2rem;
-    }
-
-    .auth-card p {
-      color: var(--text-secondary);
-      margin-bottom: 30px;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-      text-align: left;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.8);
-    }
-
-    .toggle-auth {
-      margin-top: 20px;
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-    }
-
-    .toggle-auth a {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.2s;
-    }
-
-    .toggle-auth a:hover {
-      color: var(--primary-hover);
-    }
-  </style>
-  <script type="module" crossorigin src="/assets/main-BHmKR3Zl.js"></script>
-  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  <script type="module" crossorigin src="/assets/main-DdBBdw4x.js"></script>
 </head>
 <body>
   <div id="alert-container"></div>
 
-  <div class="auth-container">
-    <div class="glass-panel auth-card animate-fade-in" id="login-box">
-      <h1>Chào mừng trở lại</h1>
-      <p>Đăng nhập để tìm kiếm công việc tốt nhất</p>
+  <!-- AUTH VIEW -->
+  <div id="auth-view" class="auth-container" style="display: flex; width: 100vw; height: 100vh; justify-content: center; align-items: center;">
+    <div class="glass-panel auth-card animate-fade-in" id="login-box" style="margin: auto; width: 100%; max-width: 400px; padding: 40px 30px; text-align: center;">
+      <img src="/assets/logo-C58AM47G.png" alt="HomeBase Logo" style="width: 80px; height: 80px; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 15px;" />
+      <h1 style="font-size: 2rem; margin-bottom: 10px;">Chào mừng</h1>
+      <p style="color: var(--text-secondary); margin-bottom: 30px;">Đăng nhập để vào không gian làm việc</p>
       
       <form id="login-form">
-        <div class="form-group">
+        <div class="form-group" style="text-align: left;">
           <label for="login-email">Email</label>
           <input type="email" id="login-email" class="glass-input" placeholder="nhap.email@cua.ban" required />
         </div>
-        <div class="form-group">
+        <div class="form-group" style="text-align: left;">
           <label for="login-password">Mật khẩu</label>
           <input type="password" id="login-password" class="glass-input" placeholder="••••••••" required />
         </div>
-        <button type="submit" class="btn-primary" id="btn-login">Đăng nhập</button>
+        <button type="submit" class="btn-primary" id="btn-login" style="width: 100%;">Đăng nhập</button>
       </form>
 
-      <div class="toggle-auth">
-        Chưa có tài khoản? <a href="#" id="show-register">Đăng ký ngay</a>
+      <div style="margin-top: 20px; font-size: 0.9rem; color: var(--text-secondary);">
+        Chưa có tài khoản? <a href="#" id="show-register" style="color: var(--primary); text-decoration: none; font-weight: 600;">Đăng ký ngay</a>
       </div>
     </div>
 
-    <!-- Register Box -->
-    <div class="glass-panel auth-card animate-fade-in" id="register-box" style="display: none;">
-      <h1>Tạo tài khoản</h1>
-      <p>Bắt đầu sự nghiệp của bạn cùng HomeBase</p>
+    <div class="glass-panel auth-card animate-fade-in" id="register-box" style="display: none; margin: auto; width: 100%; max-width: 400px; padding: 40px 30px; text-align: center;">
+      <img src="/assets/logo-C58AM47G.png" alt="HomeBase Logo" style="width: 80px; height: 80px; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 15px;" />
+      <h1 style="font-size: 2rem; margin-bottom: 10px;">Tạo tài khoản</h1>
+      <p style="color: var(--text-secondary); margin-bottom: 30px;">Bắt đầu sự nghiệp của bạn</p>
       
       <form id="register-form">
-        <div class="form-group">
+        <div class="form-group" style="text-align: left;">
           <label for="reg-name">Họ và tên</label>
           <input type="text" id="reg-name" class="glass-input" placeholder="Nguyễn Văn A" required />
         </div>
-        <div class="form-group">
+        <div class="form-group" style="text-align: left;">
           <label for="reg-email">Email</label>
           <input type="email" id="reg-email" class="glass-input" placeholder="nhap.email@cua.ban" required />
         </div>
-        <div class="form-group">
+        <div class="form-group" style="text-align: left;">
           <label for="reg-password">Mật khẩu</label>
           <input type="password" id="reg-password" class="glass-input" placeholder="••••••••" required />
         </div>
-        <div class="form-group">
+        <div class="form-group" style="text-align: left;">
           <label>Vai trò</label>
           <div style="display: flex; gap: 20px; margin-top: 10px; font-size: 0.95rem;">
             <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-              <input type="radio" name="reg-role" value="Employee" checked style="cursor: pointer;" /> Người tìm việc
+              <input type="radio" name="reg-role" value="Employee" checked style="cursor: pointer;" /> Nhân viên
             </label>
             <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-              <input type="radio" name="reg-role" value="Employer" style="cursor: pointer;" /> Nhà tuyển dụng
+              <input type="radio" name="reg-role" value="Employer" style="cursor: pointer;" /> Quản lý
             </label>
           </div>
         </div>
-        <button type="submit" class="btn-primary" id="btn-register">Đăng ký</button>
+        <button type="submit" class="btn-primary" id="btn-register" style="width: 100%;">Đăng ký</button>
       </form>
 
-      <div class="toggle-auth">
-        Đã có tài khoản? <a href="#" id="show-login">Đăng nhập</a>
+      <div style="margin-top: 20px; font-size: 0.9rem; color: var(--text-secondary);">
+        Đã có tài khoản? <a href="#" id="show-login" style="color: var(--primary); text-decoration: none; font-weight: 600;">Đăng nhập</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD VIEW (SPA APP SHELL) -->
+  <div id="dashboard-view" style="display: none; width: 100vw; height: 100vh;">
+    
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <img src="/assets/logo-C58AM47G.png" alt="Logo" style="width: 32px; height: 32px; border-radius: 8px;" />
+        <h1>HomeBase</h1>
+      </div>
+
+      <div class="nav-links">
+        <a class="nav-link active" data-view="view-home">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          Trang Chủ
+        </a>
+        <a class="nav-link" data-view="view-jobs">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          Khám Phá Việc
+        </a>
+        <a class="nav-link" data-view="view-schedule">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          Lịch Làm Việc
+        </a>
+        <a class="nav-link" data-view="view-timeclock">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          Chấm Công
+        </a>
+        <a class="nav-link" data-view="view-leaves">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          Xin Nghỉ
+        </a>
+        <a class="nav-link" data-view="view-chat">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          Trò Chuyện
+        </a>
+        <a class="nav-link" data-view="view-notifications">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          Thông Báo
+          <span id="notif-badge" style="background: var(--primary); color: white; padding: 2px 6px; border-radius: 10px; font-size: 0.7rem; margin-left: auto; display: none;">0</span>
+        </a>
+      </div>
+
+      <div class="user-profile" id="btn-logout">
+        <div class="user-avatar" id="sidebar-avatar">U</div>
+        <div style="flex: 1; overflow: hidden;">
+          <div style="font-weight: 600; font-size: 0.95rem; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;" id="sidebar-name">Đang tải...</div>
+          <div style="font-size: 0.8rem; color: var(--text-secondary);" id="sidebar-role">---</div>
+        </div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+      
+      <!-- VIEW: HOME -->
+      <div id="view-home" class="view-section active">
+        <div class="section-header">
+          <h2>Trang Chủ</h2>
+          <div id="home-greeting" style="color: var(--text-secondary);">Hôm nay là một ngày tuyệt vời!</div>
+        </div>
+        <div class="grid-cards">
+          <div class="glass-panel card">
+            <h3 style="margin-bottom: 10px; color: var(--primary);">Công Việc Của Tôi</h3>
+            <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 5px;" id="stat-jobs">0</div>
+            <div style="color: var(--text-secondary); font-size: 0.9rem;">Việc đang chờ</div>
+          </div>
+          <div class="glass-panel card">
+            <h3 style="margin-bottom: 10px; color: var(--info);">Lịch Làm Việc</h3>
+            <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 5px;" id="stat-shifts">0</div>
+            <div style="color: var(--text-secondary); font-size: 0.9rem;">Ca sắp tới</div>
+          </div>
+          <div class="glass-panel card">
+            <h3 style="margin-bottom: 10px; color: var(--success);">Nhiệm Vụ</h3>
+            <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 5px;" id="stat-tasks">0</div>
+            <div style="color: var(--text-secondary); font-size: 0.9rem;">Cần hoàn thành</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: JOBS (Khám Phá) -->
+      <div id="view-jobs" class="view-section">
+        <div class="section-header">
+          <h2>Khám Phá Việc Làm</h2>
+          <div style="display: flex; gap: 15px;">
+            <input type="text" id="job-search" class="glass-input" placeholder="Tìm kiếm công việc..." style="width: 250px; padding: 10px 15px;" />
+            <button id="btn-open-create" class="btn-primary" style="padding: 10px 20px;">+ Đăng Việc Mới</button>
+          </div>
+        </div>
+        <div id="jobs-container" class="grid-cards">
+          <!-- Jobs rendered here -->
+        </div>
+      </div>
+
+      <!-- VIEW: SCHEDULE -->
+      <div id="view-schedule" class="view-section">
+        <div class="section-header">
+          <h2>Lịch Làm Việc</h2>
+          <div style="display: flex; gap: 15px; align-items: center;">
+            <label for="schedule-date" style="color: var(--text-secondary);">Xem ngày:</label>
+            <input type="date" id="schedule-date" class="glass-input" style="width: auto; padding: 10px 15px;" />
+            <button class="btn-primary" id="btn-clear-date" style="padding: 10px 15px; width: auto; background: rgba(255,255,255,0.1);">Tất cả</button>
+          </div>
+        </div>
+        <div id="schedule-container" class="grid-cards">
+          <!-- Shifts rendered here -->
+        </div>
+      </div>
+
+      <!-- VIEW: TIMECLOCK -->
+      <div id="view-timeclock" class="view-section">
+        <div class="section-header">
+          <h2>Chấm Công</h2>
+          <button class="btn-primary" id="btn-timeclock-history" style="width: auto; background: rgba(255,255,255,0.1); color: var(--text-primary);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 5px;"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            Lịch Sử
+          </button>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <label style="color: var(--text-secondary); margin-bottom: 5px; display: block;">Chọn công việc đang làm</label>
+          <select class="glass-input" id="timeclock-job-selector">
+            <option value="1">Ca Sáng - Cửa hàng Q1</option>
+            <option value="2">Ca Chiều - Cửa hàng Q3</option>
+          </select>
+        </div>
+
+        <div class="glass-panel" style="text-align: center; padding: 40px; margin-bottom: 20px;">
+          <div id="clock-display" style="font-size: 3rem; font-weight: 700; font-variant-numeric: tabular-nums;">--:--:--</div>
+          <div id="date-display" style="color: var(--text-secondary); margin-top: 10px;">Đang tải...</div>
+          <div id="timeclock-status" style="margin-top: 15px; font-weight: 600; color: var(--warning);">Bạn chưa vào ca</div>
+        </div>
+
+        <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+          <button class="btn-primary" id="btn-clock-in" style="flex: 1; padding: 15px; background: linear-gradient(135deg, var(--success), #2e7d32);">
+            📸 CHỤP ẢNH & VÀO CA
+          </button>
+          <button class="btn-primary" id="btn-clock-out" style="flex: 1; padding: 15px; background: linear-gradient(135deg, var(--primary), #cc0000);">
+            📸 CHỤP ẢNH & RA CA
+          </button>
+        </div>
+
+        <button class="btn-primary" id="btn-break" style="width: 100%; padding: 15px; background: rgba(255,255,255,0.1); color: var(--text-primary); border: 1px solid var(--border-glass);">
+          Bắt Đầu Nghỉ Giải Lao
+        </button>
+
+        <!-- History Modal inside the view or absolute -->
+        <div class="modal-overlay" id="history-modal">
+          <div class="glass-panel modal-content" style="max-height: 80vh; display: flex; flex-direction: column;">
+            <div class="modal-header">
+              <h2>Lịch Sử Chấm Công</h2>
+              <button class="close-btn" id="btn-close-history">&times;</button>
+            </div>
+            <div id="history-list" style="overflow-y: auto; flex: 1; margin-top: 15px;">
+              <div style="text-align: center; color: var(--text-secondary);">Đang tải dữ liệu...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Camera Modal -->
+        <div class="modal-overlay" id="camera-modal">
+          <div class="glass-panel modal-content" style="text-align: center;">
+            <div class="modal-header">
+              <h2>Xác Nhận Khuôn Mặt</h2>
+              <button class="close-btn" id="btn-close-camera">&times;</button>
+            </div>
+            <div style="width: 100%; height: 300px; background: #000; border-radius: 12px; overflow: hidden; margin-bottom: 15px; position: relative;">
+              <video id="camera-preview" autoplay playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>
+            </div>
+            <button class="btn-primary" id="btn-capture-camera">📸 Xác nhận & Chấm Công</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: LEAVES -->
+      <div id="view-leaves" class="view-section">
+        <div class="section-header">
+          <h2>Xin Nghỉ</h2>
+          <button class="btn-primary" id="btn-open-leave" style="width: auto; padding: 10px 20px; background: #FF9500;">+ Tạo Đơn Khai Báo</button>
+        </div>
+        <div id="leaves-container" class="grid-cards">
+          <!-- Leaves rendered here -->
+        </div>
+      </div>
+
+      <!-- VIEW: CHAT -->
+      <div id="view-chat" class="view-section">
+        <div class="section-header">
+          <h2>Trò Chuyện Nội Bộ</h2>
+        </div>
+        <div class="chat-container">
+          <div class="chat-messages" id="chat-messages">
+            <!-- Chat history here -->
+            <div style="text-align: center; color: var(--text-secondary); margin-top: auto;">Đang kết nối...</div>
+          </div>
+          <form class="chat-input-area" id="chat-form">
+            <input type="text" id="chat-input" class="glass-input" placeholder="Nhập tin nhắn..." required />
+            <button type="submit" class="btn-primary" style="width: auto; background: var(--info);">Gửi</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- VIEW: NOTIFICATIONS -->
+      <div id="view-notifications" class="view-section">
+        <div class="section-header">
+          <h2>Thông Báo</h2>
+        </div>
+        <div id="notifications-container" style="display: flex; flex-direction: column; gap: 15px;">
+          <!-- Notifications rendered here -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Create Job Modal -->
+  <div class="modal-overlay" id="create-modal">
+    <div class="glass-panel modal-content">
+      <div class="modal-header">
+        <h2>Đăng Việc Mới</h2>
+        <button class="close-btn" id="btn-close-modal">&times;</button>
+      </div>
+      <form id="create-job-form">
+        <div class="form-group">
+          <label>Tên công việc</label>
+          <input type="text" id="job-title" class="glass-input" required placeholder="VD: Nhân viên phục vụ quán Cafe" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Phân loại công việc</label>
+            <select id="job-category" class="glass-input" required>
+              <option value="Phục vụ">Phục vụ</option>
+              <option value="Pha chế">Pha chế</option>
+              <option value="Bán hàng">Bán hàng</option>
+              <option value="Khác" selected>Khác</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Ca làm việc</label>
+            <select id="job-shift-type" class="glass-input" required>
+              <option value="Sáng (07:00 - 12:00)">Sáng (07:00 - 12:00)</option>
+              <option value="Chiều (12:00 - 18:00)">Chiều (12:00 - 18:00)</option>
+              <option value="Tối (18:00 - 23:00)">Tối (18:00 - 23:00)</option>
+              <option value="Khác" selected>Khác</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Tên cửa hàng / Công ty</label>
+          <input type="text" id="job-employer" class="glass-input" required placeholder="VD: The Coffee House" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Mức lương</label>
+            <input type="text" id="job-pay" class="glass-input" required placeholder="VD: 25.000đ/giờ" />
+          </div>
+          <div class="form-group">
+            <label>Số người cần</label>
+            <input type="number" id="job-workers" class="glass-input" required min="1" value="1" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Ngày bắt đầu</label>
+            <input type="date" id="job-start" class="glass-input" required />
+          </div>
+          <div class="form-group">
+            <label>Ngày kết thúc</label>
+            <input type="date" id="job-end" class="glass-input" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Địa điểm</label>
+          <input type="text" id="job-location" class="glass-input" required placeholder="VD: Quận 1, TP.HCM" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Số điện thoại liên hệ</label>
+            <input type="tel" id="job-phone" class="glass-input" required placeholder="VD: 0901234567" />
+          </div>
+          <div class="form-group">
+            <label>Email liên hệ</label>
+            <input type="email" id="job-email" class="glass-input" placeholder="VD: contact@abc.com" />
+          </div>
+        </div>
+        <button type="submit" class="btn-primary" id="btn-submit-job">Đăng Ngay</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Applicants Modal -->
+  <div class="modal-overlay" id="applicants-modal">
+    <div class="glass-panel modal-content" style="max-height: 80vh; display: flex; flex-direction: column;">
+      <div class="modal-header">
+        <h2>Danh Sách Ứng Viên</h2>
+        <button class="close-btn" id="btn-close-applicants-modal">&times;</button>
+      </div>
+      <div id="applicants-list" style="overflow-y: auto; flex: 1;">
+        <div style="text-align: center; color: var(--text-secondary); padding: 20px;">Đang tải...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Leave Modal -->
+  <div class="modal-overlay" id="leave-modal">
+    <div class="glass-panel modal-content">
+      <div class="modal-header">
+        <h2>Tạo Đơn Xin Nghỉ</h2>
+        <button class="close-btn" id="btn-close-leave-modal">&times;</button>
+      </div>
+      <form id="create-leave-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Từ ngày</label>
+            <input type="date" id="leave-start" class="glass-input" required />
+          </div>
+          <div class="form-group">
+            <label>Đến ngày</label>
+            <input type="date" id="leave-end" class="glass-input" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Lý do</label>
+          <textarea id="leave-reason" class="glass-input" placeholder="Nhập lý do xin nghỉ..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary" id="btn-submit-leave">Gửi Đơn</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Shift Details Modal -->
+  <div class="modal-overlay" id="shift-detail-modal">
+    <div class="glass-panel modal-content">
+      <div class="modal-header">
+        <h2>Chi Tiết Ca Làm Việc</h2>
+        <button class="close-btn" id="btn-close-shift-modal">&times;</button>
+      </div>
+      <div id="shift-detail-content" style="display: flex; flex-direction: column; gap: 15px;">
+        <div style="text-align: center; color: var(--text-secondary);">Đang tải...</div>
       </div>
     </div>
   </div>
